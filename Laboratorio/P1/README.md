@@ -1,6 +1,6 @@
 # Práctica 1: ATRACTOR LOGÍSTICO
 
-## Introducción Python
+## Observaciones Python
 ### Diferentes formas de crear variables vacías (array y listas)
 ```python
 n1 = np.empty([10])
@@ -12,6 +12,18 @@ print(n3) # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 print(type(n1)) # <type 'numpy.ndarray'>
 print(type(n2)) # <type 'list'>
 print(type(n3)) # <type 'list'>
+```
+
+### Ojo con la multiplicación de listas
+```python
+# [-1,-1]*[1,2]
+a = [-1,-1]
+b = [1,2]
+print(np.array(a)*np.array(b)) # [-1,-2]
+print(np.multiply(a,b)) # [-1,-2]
+print([a0*b0 for a0,b0 in zip(a,b)]) # [-1,-2]
+print([a[i]*b[i] for i in range(len(a))]) # [-1,-2]
+print(map(lambda x,y: x*y, a,b)) # [-1,-2]
 ```
 
 ## Número de iteraciones
