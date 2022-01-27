@@ -1,0 +1,2 @@
+# GCom
+Asignatura: Geometría Computacional
