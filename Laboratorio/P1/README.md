@@ -2,6 +2,7 @@
 
 ## Introducción Python
 ### Diferentes formas de crear variables vacías (array y listas)
+```python
 n1 = np.empty([10])
 n2 = [0]*10
 n3 = [0 for x in range(10)]
@@ -11,6 +12,7 @@ print(n3)
 print(type(n1))
 print(type(n2))
 print(type(n3))
+```
 
 ## Número de iteraciones
 Realizar 200 o 100 (no 3).
