@@ -6,12 +6,12 @@
 n1 = np.empty([10])
 n2 = [0]*10
 n3 = [0 for x in range(10)]
-print(n1)
-print(n2)
-print(n3)
-print(type(n1))
-print(type(n2))
-print(type(n3))
+print(n1) # [ 0.  0.  0.  0.  0.  0.  0.  0.  0.  0.]
+print(n2) # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+print(n3) # [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+print(type(n1)) # <type 'numpy.ndarray'>
+print(type(n2)) # <type 'list'>
+print(type(n3)) # <type 'list'>
 ```
 
 ## Número de iteraciones
