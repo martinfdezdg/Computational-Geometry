@@ -152,7 +152,7 @@ r = 3.1
 #r=3.5
 orb = orbita(x0,logistica,80)
 ult = orb[-1*np.arange(20,0,-1)]
-per = periodo(ult)
+per = periodo(ult) # periodo de 20 ult de la orbita a partir de prim bif
 
 #Candidato a conjunto atractor   
 #V0 = np.array([ult[N-1-i] for i in range(per)])
@@ -198,6 +198,7 @@ def atrac(f, N0, N, epsilon=0.001):
     per = periodo(ult, epsilon)
     V0 = np.sort([ult[N-1-i] for i in range(per)])
     return V0
+
 
 N0 = 200
 N = 50

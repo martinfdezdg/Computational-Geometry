@@ -27,7 +27,7 @@ print(map(lambda x,y: x*y, a,b)) # [-1,-2]
 ```
 
 ## Número de iteraciones
-Realizar 200 o 100 (no 3).
+Realizar 200 ó 100 (no 3).
 
 ## Diferencia entre picos (no entre picos y valles)
 Observamos las diferencias: 0,5 - 0,3 - ...
@@ -44,7 +44,9 @@ Si el error es de 0,10 - 0,19 se puede mantener el 3.
 
 *Si no se especifica, la última cifra significativa me está dando el error, p.e. 3,51 +- 0,01*
 
+**Cómo entenderlo**
+Cada conjunto V0 contiene los estados que adopta cierta orbita cuando tiende a infinito.
+Es decir, tras cierto punto inicial x0 y cierta etapa r, se estudia la evolución de la órbita y los estados a los que converge para luego representarlos como puntos y formar el árbol de Feigenbaum.
 
-
-**Preguntas típicas**
+**Preguntas típicas de examen**
 Qué es una orbita, qué es una atracción, etc.
