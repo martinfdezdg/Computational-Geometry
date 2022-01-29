@@ -52,11 +52,15 @@ Es decir, tras cierto punto inicial x0 y en cierta etapa r, se estudia la evoluc
 ## Dudas
 #### Cálculo de error
 Si tenemos la siguiente órbita
+```python
 [0.58292956, 0.74389456, 0.58277908, 0.74378548, 0.58238252, 0.74329452]
+```
 que podemos separar en los siguientes ciclos
+```python
 V0 = [0.58292956, 0.74389456]
 V1 = [0.58277908, 0.74378548]
 V2 = [0.58238252, 0.74329452]
+```
 ¿el error se calcula de manera relativa, respecto al inmediatamente anterior, o absoluta respecto al primero?
 
 ## Preguntas típicas de examen
