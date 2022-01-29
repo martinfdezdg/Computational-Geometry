@@ -54,7 +54,7 @@ def periodo(suborb,epsilon=0.001):
 Dada una función f, dos enteros N0 y N y un epsilon suficientemente pequeño
 devuelve una lista ordenada con los per elementos de una suborbita final de N respecto de una orbita de N0 elementos
 """
-def atractor(f,N0,N,epsilon=0.001):
+def atractor(x0,f,N0,N,epsilon=0.001):
     orb = orbita(x0,f,N0)
     # plt.plot(orb)
     ult = orb[-1*np.arange(N,0,-1)]
@@ -63,6 +63,17 @@ def atractor(f,N0,N,epsilon=0.001):
     # print "per:", str(per)
     V0 = np.sort([ult[N-1-i] for i in range(per)])
     return V0
+
+"""
+"""
+def error(V0,f,M):
+    per = len(V0)
+    for i in range(M):
+        # Generamos M ciclos más
+        x = fn(V0[per-1],logistica,i*per+1)
+        V1 = orbita(x,f,per)
+        for i in range(per):
+            
 
 
 
@@ -82,8 +93,9 @@ print "\n" + BOLD + "Apartado i)" + RESET
 i = 0
 while i < 2:
     r = rand.uniform(3.000,3.544)
-    V0 = atractor(logistica,N0,N)
+    V0 = atractor(x0,logistica,N0,N)
     # TODO: Estimación del error y evitar que sean la misma órbita
+    # err = error(V0,)
     if len(V0) != 0:
         print "Órbita", i+1, "de", len(V0), "elementos con r =", r
         print "Conjunto atractor:", V0
@@ -93,10 +105,10 @@ while i < 2:
 # APARTADO ii)
 print "\n" + BOLD + "Apartado ii)" + RESET
 
-V0 = []
-while len(V0) != 8:
+V0 = np.empty([])
+while V0.size != 8:
     r = rand.uniform(3.544,4.000)
-    V0 = atractor(logistica,N0,N)
+    V0 = atractor(x0,logistica,N0,N)
 
 print "Órbita de 8 elementos con r =", r
 print "Conjunto atractor:", V0

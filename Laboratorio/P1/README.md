@@ -49,5 +49,15 @@ Si el error es de 0,10 - 0,19 se puede mantener el 3.
 Cada conjunto V0 contiene los estados que adopta cierta orbita cuando tiende a infinito.
 Es decir, tras cierto punto inicial x0 y en cierta etapa r, se estudia la evolución de la órbita y los estados a los que converge para luego representarlos como puntos y formar el árbol de Feigenbaum.
 
+## Dudas
+#### Cálculo de error
+Si tenemos la siguiente órbita
+[0.58292956, 0.74389456, 0.58277908, 0.74378548, 0.58238252, 0.74329452]
+que podemos separar en los siguientes ciclos
+V0 = [0.58292956, 0.74389456]
+V1 = [0.58277908, 0.74378548]
+V2 = [0.58238252, 0.74329452]
+¿el error se calcula de manera relativa, respecto al inmediatamente anterior, o absoluta respecto al primero?
+
 ## Preguntas típicas de examen
 - Qué es una orbita, qué es una atracción, etc.
