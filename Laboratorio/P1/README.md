@@ -1,7 +1,7 @@
 # Práctica 1: ATRACTOR LOGÍSTICO
 
-## Observaciones Python
-### Diferentes formas de crear variables vacías (array y listas)
+### Tutorial introducción Python
+#### Diferentes formas de crear variables vacías (array y listas)
 ```python
 n1 = np.empty([10])
 n2 = [0]*10
