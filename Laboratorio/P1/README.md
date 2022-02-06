@@ -45,9 +45,11 @@ Si el error es de 0,10 - 0,19 se puede mantener el 3.
 *Si no se especifica, la última cifra significativa me está dando el error, p.e. 3,51 +- 0,01*
 
 ## Desarrollo
-#### Cómo entender la práctica
+### Cómo entender la práctica
 Cada conjunto V0 contiene los estados que adopta cierta orbita cuando tiende a infinito.
 Es decir, tras cierto punto inicial x0 y en cierta etapa r, se estudia la evolución de la órbita y los estados a los que converge para luego representarlos como puntos y formar el árbol de Feigenbaum.
+### Calcular conjunto atractor
+Algoritmo 1.2.1. (Búsqueda de atractores)
 
 ## Dudas
 #### Cálculo de error
@@ -62,6 +64,12 @@ V1 = [0.58277908, 0.74378548]
 V2 = [0.58238252, 0.74329452]
 ```
 ¿el error se calcula de manera relativa, respecto al inmediatamente anterior, o absoluta respecto al primero?
+
+Error de hipótesis: Método de aprox. de Newton, de Taylor...  
+Error de medida del objeto: Se da si nuestro método ya es adecuado y sabemos controlarlo.  
+
+Error de puntos: Iterar el ciclo k veces y analizar las diferencias entre cada par de puntos.  
+Error de r: 
 
 ## Preguntas típicas de examen
 - Qué es una orbita, qué es una atracción, etc.
