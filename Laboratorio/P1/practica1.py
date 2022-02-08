@@ -9,7 +9,7 @@ import numpy as np
 import random as rand
 
 """
-Dados dos elementos o conjuntos de elementos
+Dados dos elementos o conjuntos de elementos y un épsilon suficientemente pequeño
 devuelve si son lo suficientemente parecidos
 """
 def igual(x,y,epsilon=0.001):
@@ -43,11 +43,11 @@ def orbita(x0,r,f,N):
     return(orb)
 
 """
-Dado una subórbita y un épsilon suficientemente pequeño
+Dado una subórbita
 devuelve min(i) tal que |f^n(x0) - f^i(x0)| < epsilon
 """
 # Encontramos el tamaño de los ciclos
-def periodo(suborb,epsilon=0.001):
+def periodo(suborb):
     N = len(suborb)
     per = -1
     for i in np.arange(2,N-1,1):
@@ -58,13 +58,13 @@ def periodo(suborb,epsilon=0.001):
     return(per)
 
 """
-Dada una función f, dos enteros N0 y N y un épsilon suficientemente pequeño
+Dada una función f y dos enteros N0 y N
 devuelve una lista ordenada con los per elementos de una subórbita final de N respecto de una órbita de N0 elementos
 """
-def atractor(x0,r,f,N0,N,epsilon=0.001):
+def atractor(x0,r,f,N0,N):
     orb = orbita(x0,r,f,N0)
     ult = orb[-1*np.arange(N,0,-1)]
-    per = periodo(ult, epsilon)
+    per = periodo(ult)
     V0 = np.sort([ult[N-1-i] for i in range(per)])
     return V0
 
@@ -105,8 +105,8 @@ def error_x(x0,r,f,N0,N,V0,MAX_N0,MAX_ERR,epsilon=0.1):
     while not estable and MAX_ERR > 0:
         estable = True
         # Comprobación de si es un punto estable
-        N1_mayor = tiempo_transitorio(abs(min(1,x0+epsilon)),r,f,N0,MAX_N0)
-        N1_menor = tiempo_transitorio(abs(x0-epsilon),r,f,N0,MAX_N0)
+        N1_mayor = tiempo_transitorio(min(1,x0+epsilon),r,f,N0,MAX_N0)
+        N1_menor = tiempo_transitorio(max(0,x0-epsilon),r,f,N0,MAX_N0)
         if (N1_mayor >= MAX_N0 or N1_menor >= MAX_N0):
             epsilon /= 2
             MAX_ERR -= 1
@@ -147,16 +147,18 @@ def error_r(x0,r,f,N0,N,V0,MAX_ERR,epsilon=0.1):
 
 
 
-# VARIABLES
-BOLD = "\033[1m"
-RESET = "\033[0m"
+# FORMATO
+class Formato:
+    BOLD = "\033[1m"
+    RESET = "\033[0m"
 
+# CONSTANTES
 MAX_N0, MAX_ERR = 500, 10
 N0, N = 50, 50
 x0 = rand.uniform(0,1)
 
 # APARTADO i)
-print("\n" + BOLD + "Apartado i)" + RESET)
+print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 
 i = 0
 V0_aux = np.empty([N])
@@ -173,7 +175,7 @@ while i < 2:
             i += 1
 
 # APARTADO ii)
-print("\n" + BOLD + "Apartado ii)" + RESET)
+print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 
 V0 = np.empty([])
 while V0.size != 8:
