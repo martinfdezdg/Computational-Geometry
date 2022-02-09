@@ -8,8 +8,8 @@ import numpy as np
 import random as rand
 
 """
-Dados dos elementos y un épsilon suficientemente pequeño
-devuelve si son lo suficientemente parecidos
+Dados una x, un cierto eps y un intervalo [a,b]
+ajusta la eps para que x+eps y x-eps quepan en dicho intervalo
 """
 # Restando epsilon evitamos que epsilon sature en los extremos indeseablemente
 def ajustar(x,eps,a,b,epsilon=0.001):
@@ -80,8 +80,8 @@ def periodo(suborb):
     return(per)
 
 """
-Dada una función f y dos enteros N0 y N
-devuelve una lista ordenada con los per elementos de una subórbita final de N respecto de una órbita de N0 elementos
+Dada una función f y dos enteros N y N_cola
+devuelve una lista ordenada con los per elementos de una subórbita final de N_cola respecto de una órbita de N elementos
 """
 def atractor(x0,r,f,N,N_cola):
     orb = orbita(x0,r,f,N)
@@ -91,7 +91,7 @@ def atractor(x0,r,f,N,N_cola):
     return V
 
 """
-Dada una función f y un entero N0
+Dada una función f y un entero N
 devuelve el mínimo m que cumpla la condición de recubrimiento del algoritmo
 """
 # Encontramos un m a partir del que se puede intuir una cuenca de atracción
@@ -115,8 +115,8 @@ def tiempo_transitorio(x0,r,f,N):
     return m
 
 """
-Dada una función f, dos enteros N0 y N que indican longitudes en la sucesión, un conjunto atractor, dos enteros que limitan la ejecución y un épsilon suficientemente pequeño
-devuelve el mayor épsilon posible que define un entorno de atracción respecto al V0
+Dada una función f, dos enteros N y N_cola que indican longitudes en la sucesión, el conjunto atractor y un épsilon suficientemente pequeño
+devuelve el mayor épsilon posible que define un entorno de atracción respecto al V
 """
 def error_x(x0,r,f,N,N_cola,V,epsilon=0.1):
     epsilon = ajustar(x0,epsilon,0,1)
@@ -161,7 +161,7 @@ while i < 2:
         i += 1
 
 # CONSTANTES
-N0, N_cola,  = 200, 50
+N0, N_cola,  = 100, 50
 
 # APARTADO ii)
 print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
@@ -172,10 +172,12 @@ err_r = 1
 intervalo = False
 for r in np.arange(3544,4000):
     r /= factor_r
-    V = atractor(x0,r,logistica,N0,N_cola)
+    N = tiempo_transitorio(x0,r,logistica,N0)
+    V = atractor(x0,r,logistica,N,N_cola)
     if not intervalo and len(V) == 8:
         ext_izq.append(r)
         intervalo = True
+        r_ej, V_ej = r, V # Ejemplo
     elif intervalo and len(V) != 8:
         ext_der.append(r-err_r/factor_r)
         intervalo = False
@@ -185,3 +187,5 @@ print("  > ",end='')
 for izq,der in zip(ext_izq,ext_der):
     print("[",izq,",",der,"]",end='')
 print("\n")
+print("  > Cuenca de atracción de 8 elementos en r =",r_ej)
+print("  >",V_ej)
