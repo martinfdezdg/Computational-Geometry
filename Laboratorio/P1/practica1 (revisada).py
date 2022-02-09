@@ -161,7 +161,7 @@ while i < 2:
         i += 1
 
 # CONSTANTES
-N0, N_cola,  = 100, 50
+N0, N_cola,  = 100, 10
 
 # APARTADO ii)
 print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
@@ -172,8 +172,7 @@ err_r = 1
 intervalo = False
 for r in np.arange(3544,4000):
     r /= factor_r
-    N = tiempo_transitorio(x0,r,logistica,N0)
-    V = atractor(x0,r,logistica,N,N_cola)
+    V = atractor(x0,r,logistica,N0,N_cola)
     if not intervalo and len(V) == 8:
         ext_izq.append(r)
         intervalo = True
