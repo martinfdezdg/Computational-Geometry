@@ -1,7 +1,7 @@
 """
 PRÁCTICA 1: ATRACTOR LOGÍSTICO
-Belén Sánchez Centeno
 Martín Fernández de Diego
+Belén Sánchez Centeno
 """
 
 import matplotlib.pyplot as plt
