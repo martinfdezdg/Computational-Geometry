@@ -9,16 +9,16 @@ import numpy as np
 import random as rand
 
 """
-Dados una x, un cierto eps y un intervalo [a,b]
+Dados una x, un cierto delta y un intervalo [a,b]
 ajusta la eps para que x+eps y x-eps quepan en dicho intervalo
 """
 # Restando epsilon evitamos que epsilon sature en los extremos indeseablemente
-def ajustar(x,eps,a,b,epsilon=0.001):
-    if x + eps > b:
+def ajustar(x,delta,a,b,epsilon=0.001):
+    if x + delta > b:
         return b - x - epsilon
-    if x - eps < a:
+    if x - delta < a:
         return x - a - epsilon
-    return eps
+    return delta
 
 """
 Dados dos elementos
@@ -117,22 +117,22 @@ def tiempo_transitorio(x0,r,f,N):
 
 """
 Dada una función f, dos enteros N y N_cola que indican longitudes en la sucesión y el conjunto atractor
-devuelve el mayor épsilon posible que define un entorno de atracción respecto al V
+devuelve el mayor delta posible que define un entorno de atracción respecto al V
 """
-def error_x(x0,r,f,N,N_cola,V,epsilon=0.5):
-    epsilon = ajustar(x0,epsilon,0,1)
+def error_x(x0,r,f,N,N_cola,V,delta=0.5):
+    delta = ajustar(x0,delta,0,1)
     estable = False
     while not estable:
-        N_der = tiempo_transitorio(x0+epsilon,r,f,N)
-        N_izq = tiempo_transitorio(x0-epsilon,r,f,N)
-        V_der = atractor(x0+epsilon,r,f,N_der,N_cola)
-        V_izq = atractor(x0-epsilon,r,f,N_izq,N_cola)
+        N_der = tiempo_transitorio(x0+delta,r,f,N)
+        N_izq = tiempo_transitorio(x0-delta,r,f,N)
+        V_der = atractor(x0+delta,r,f,N_der,N_cola)
+        V_izq = atractor(x0-delta,r,f,N_izq,N_cola)
         # Comprobamos si es un punto estable
         if not ((len(V_der) == len(V) and len(V_izq) == len(V)) and (igual(V_der,V) and igual(V_izq,V))):
-            epsilon /= 2
+            delta /= 2
         else :
             estable = True
-    return epsilon
+    return delta
 
 
 
