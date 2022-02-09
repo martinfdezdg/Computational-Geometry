@@ -20,7 +20,7 @@ def ajustar(x,eps,a,b,epsilon=0.001):
     return eps
 
 """
-Dados dos elementos y un épsilon suficientemente pequeño
+Dados dos elementos
 devuelve si son lo suficientemente parecidos
 """
 def igual(x,y,epsilon=0.001):
@@ -115,7 +115,7 @@ def tiempo_transitorio(x0,r,f,N):
     return m
 
 """
-Dada una función f, dos enteros N y N_cola que indican longitudes en la sucesión, el conjunto atractor y un épsilon suficientemente pequeño
+Dada una función f, dos enteros N y N_cola que indican longitudes en la sucesión y el conjunto atractor
 devuelve el mayor épsilon posible que define un entorno de atracción respecto al V
 """
 def error_x(x0,r,f,N,N_cola,V,epsilon=0.1):
@@ -151,40 +151,47 @@ print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 i = 0
 while i < 2:
     r = rand.uniform(3.000,3.544)
+    # Calculamos un numero de iteraciones adecuado
     N = tiempo_transitorio(x0,r,logistica,N0)
+    # Calculamos el conjunto atractor
     V = atractor(x0,r,logistica,N,N_cola)
+    # Si los conjuntos obtenidos son distintos
     if i == 0 or not ((len(V) == len(V_ant)) and igual(V,V_ant)):
+        # Calculamos el posible error
         err_x = error_x(x0,r,logistica,N,N_cola,V)
-        print(i+1,"> Cuenca de atracción de x0 =",x0,"+-",err_x,"en r =",r)
+        # Mostramos
+        print(i+1,"- Cuenca de atracción de x0 =",x0,"+-",err_x,"en r =",r)
         print("  >",V)
         V_ant = V
         i += 1
-
-# CONSTANTES
-N0, N_cola,  = 100, 10
-
+        
 # APARTADO ii)
 print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 
 ext_izq, ext_der = [], []
-factor_r = 1000
-err_r = 1
+err_r = 0.001
 intervalo = False
-for r in np.arange(3544,4000):
-    r /= factor_r
+for r in np.arange(3.544,4.000,err_r):
+    # Calculamos el conjunto atractor
     V = atractor(x0,r,logistica,N0,N_cola)
+    # Si no estamos en el intervalo y encontramos una cuenca de 8 elementos
     if not intervalo and len(V) == 8:
         ext_izq.append(r)
         intervalo = True
-        r_ej, V_ej = r, V # Ejemplo
+    # Si estamos en el intervalo y encontramos una cuenca que no tiene 8 elementos
     elif intervalo and len(V) != 8:
-        ext_der.append(r-err_r/factor_r)
+        ext_der.append(r-err_r)
         intervalo = False
-    
-print("  >",len(ext_izq),"intervalos de 8 elementos con una sensibilidad de r =",err_r/factor_r)
-print("  > ",end='')
+
+print("  -",len(ext_izq),"intervalos de cuencas de atracción de 8 elementos con una sensibilidad de",err_r)
+print("  >",end=' ')
 for izq,der in zip(ext_izq,ext_der):
     print("[",izq,",",der,"]",end='')
-print("\n")
-print("  > Cuenca de atracción de 8 elementos en r =",r_ej)
-print("  >",V_ej)
+
+# Tomamos un valor aleatorio del intervalo
+for r in np.random.permutation(np.arange(3.544,4.000,0.001)):
+    V = atractor(x0,r,logistica,N0,N_cola)
+    if len(V) == 8:
+        print("\nEj: Cuenca de atracción de 8 elementos en r =",r)
+        print("  >",V)
+        break
