@@ -1,5 +1,6 @@
 """
 PRÁCTICA 1: ATRACTOR LOGÍSTICO
+Belén Sánchez Centeno
 Martín Fernández de Diego
 """
 
