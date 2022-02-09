@@ -102,11 +102,11 @@ def tiempo_transitorio(x0,r,f,N):
         # Si no cumple la condición del algoritmo, no hay recubrimiento para ese tiempo transitorio
         for i in range(3):
             suborb = suborbita(x0,r,f,2**i*m,2**(2**i)*m) # m - 2m / 2m - 4m / 4m - 16m
-            max_act, min_act = np.max(suborb), np.min(suborb)
+            Dt_act = np.max(suborb) - np.min(suborb)
             # Condición del algoritmo
-            if (i == 0) or (max_act <= max_ant and min_act >= min_ant and igual(max_act,max_ant) and igual(min_act,min_ant)):
+            if (i == 0) or (Dt_act <= Dt_ant and igual(Dt_act,Dt_ant)):
                 # Guardamos el recubrimiento anterior
-                max_ant, min_ant = max_act, min_act
+                Dt_ant = Dt_act
                 recubierto = i == 2;
             else :
                 # Aumentamos el tiempo transitorio
@@ -118,7 +118,7 @@ def tiempo_transitorio(x0,r,f,N):
 Dada una función f, dos enteros N y N_cola que indican longitudes en la sucesión y el conjunto atractor
 devuelve el mayor épsilon posible que define un entorno de atracción respecto al V
 """
-def error_x(x0,r,f,N,N_cola,V,epsilon=0.1):
+def error_x(x0,r,f,N,N_cola,V,epsilon=0.5):
     epsilon = ajustar(x0,epsilon,0,1)
     estable = False
     while not estable:
