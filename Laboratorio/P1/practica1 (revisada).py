@@ -141,7 +141,7 @@ class Formato:
     RESET = "\033[0m"
 
 # CONSTANTES
-N0, N_cola = 50, 50
+N0, N_cola = 100, 50
 
 x0 = rand.uniform(0,1)
 
@@ -153,7 +153,7 @@ while i < 2:
     r = rand.uniform(3.000,3.544)
     N = tiempo_transitorio(x0,r,logistica,N0)
     V = atractor(x0,r,logistica,N,N_cola)
-    if i == 0 or not (igual(len(V),len(V_ant)) and igual(V,V_ant)):
+    if i == 0 or not ((len(V) == len(V_ant)) and igual(V,V_ant)):
         err_x = error_x(x0,r,logistica,N,N_cola,V)
         print(i+1,"> Cuenca de atracción de x0 =",x0,"+-",err_x,"en r =",r)
         print("  >",V)
