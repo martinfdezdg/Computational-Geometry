@@ -58,11 +58,11 @@ def orbita(x0,f,N):
         orb[i] = fn(x0, f, i)
     return(orb)
     
-    
+print("Hola")
 N = 100
-x0 = 0.5
+x0 = 0.7471248146931895
 #Probar con r = 0.5; r = 1; r=1.1;  r=2, r=3, r=4
-r=0.5
+r = 3.256708942895666
 orb = orbita(x0,logistica,N)
 #print(orb)
 plt.plot(orb)
@@ -221,8 +221,20 @@ for j in range(N):
 plt.xlabel = "r"
 plt.ylabel = "V0"
 
-plt.axvline(x=3, ls="--")
-plt.axvline(x=3.5, ls="--")
+plt.axvline(x=3.544, ls="--")
+plt.axvline(x=3.563999999999998, ls="--")
+
+plt.axvline(x=3.580999999999996, ls="--")
+plt.axvline(x=3.580999999999996, ls="--")
+
+plt.axvline(x=3.6739999999999857, ls="--")
+plt.axvline(x=3.6749999999999856, ls="--")
+
+plt.axvline(x=3.880999999999963, ls="--")
+plt.axvline(x=3.880999999999963, ls="--")
+
+plt.axvline(x=3.9389999999999565, ls="--")
+plt.axvline(x=3.9389999999999565, ls="--")
 
 plt.show()
 

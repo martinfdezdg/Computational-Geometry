@@ -1,7 +1,7 @@
 """
 PRÁCTICA 1: ATRACTOR LOGÍSTICO
-Martín Fernández de Diego
 Belén Sánchez Centeno
+Martín Fernández de Diego
 """
 
 import matplotlib.pyplot as plt
@@ -184,7 +184,7 @@ for r in np.arange(3.544,4.000,err_r):
         ext_der.append(r-err_r)
         intervalo = False
 
-print("  -",len(ext_izq),"intervalos de cuencas de atracción de 8 elementos con una sensibilidad de",err_r)
+print("  -",len(ext_izq),"intervalos de cuencas de atracción de 8 elementos con una sensibilidad de",err_r,"en x0 =",x0)
 print("  >",end=' ')
 for izq,der in zip(ext_izq,ext_der):
     print("[",izq,",",der,"]",end='')
@@ -193,6 +193,7 @@ for izq,der in zip(ext_izq,ext_der):
 for r in np.random.permutation(np.arange(3.544,4.000,0.001)):
     V = atractor(x0,r,logistica,N0,N_cola)
     if len(V) == 8:
-        print("\nEj: Cuenca de atracción de 8 elementos en r =",r)
+        err_x = error_x(x0,r,logistica,N0,N_cola,V)
+        print("\nEj: Cuenca de atracción de 8 elementos de x0 =",x0,"+-",err_x,"en r =",r)
         print("  >",V)
         break
