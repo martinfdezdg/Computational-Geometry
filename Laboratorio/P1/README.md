@@ -1,4 +1,4 @@
-# Práctica 1: ATRACTOR LOGÍSTICO
+# Práctica 1: Atractor logístico
 
 ### Tutorial introducción Python
 #### Diferentes formas de crear variables vacías (array y listas)
