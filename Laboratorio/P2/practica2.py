@@ -74,7 +74,7 @@ def longitud_media(distr,d):
 
 """
 Dado un dataframe 
-devuelve la entropía
+devuelve la entropía total del sistema
 """
 def entropia(distr):
     h = 0
