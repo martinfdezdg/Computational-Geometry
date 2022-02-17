@@ -1,5 +1,5 @@
 """
-PRÁCTICA 1: CÓDIGO HUFFMAN
+PRÁCTICA 2: CÓDIGO HUFFMAN
 Belén Sánchez Centeno
 Martín Fernández de Diego
 """
