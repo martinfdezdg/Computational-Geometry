@@ -187,22 +187,14 @@ print("Teorema de Shannon: " + str(e_es) + " <= " + str(lm_es) + " < " + str(e_e
 print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 
 palabra = 'medieval'
-#palabra_es = 'miyu es el gato más guapo del mundo'
 codifica_huffman_en = codifica(palabra, d_en)
 codifica_huffman_es = codifica(palabra, d_es)
 codifica_usual = ''.join(format(c, 'b') for c in bytearray(palabra, "utf-8"))
-#codifica_usual_es = ''.join(format(c, 'b') for c in bytearray(palabra_es, "utf-8"))
 
 print("Codificacion de \"" + palabra + "\" en inglés: " + codifica_huffman_en)
 print("   Eficiencia del " + str(len(codifica_usual)/len(codifica_huffman_en)*100) + "%")
 print("Codificacion de \"" + palabra + "\" en español: " + codifica_huffman_es)
 print("   Eficiencia del " + str(len(codifica_usual)/len(codifica_huffman_es)*100) + "%")
-
-#b = bytes(palabra, encoding)
-#ba = bitarray.bitarray()
-#print(''.join(format(ord(c), 'b') for c in palabra))
-#print(''.join(format(c, 'b') for c in bytearray(palabra, "ascii")))
-#print(''.join(format(c, 'b') for c in bytearray(palabra, "utf-8")))
 
 # APARTADO iii)
 print("\n" + Formato.BOLD + "Apartado iii)" + Formato.RESET)
@@ -210,5 +202,3 @@ print("\n" + Formato.BOLD + "Apartado iii)" + Formato.RESET)
 binario = '10111101101110110111011111'
 print("La palabra '" + binario + "' decodificada del inglés es '" + decodifica(binario,d_en) + '\'')
 
-binario_es = '110001110011101101110101111110101000111010101011111011011000100000110111110001011101101100011110110110101110011010001101110001001010101111110001101111001000100110'
-print("La palabra '" + binario + "' decodificada del español es '" + decodifica(binario_es,d_es) + '\'')
