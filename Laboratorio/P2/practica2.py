@@ -1,13 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-Created on Wed Feb 16 10:10:43 2022
-
-@author: belensanchezcenteno
-"""
-
-"""
-Práctica 2
+PRÁCTICA 1: CÓDIGO HUFFMAN
+Belén Sánchez Centeno
+Martín Fernández de Diego
 """
 
 import os
