@@ -88,6 +88,6 @@ tree[0].items()
 tree[0].values()
 
 #Buscar cada estado dentro de cada uno de los dos items
-list(tree[0].items())[0][0] ## Esto proporciona un '0'
-list(tree[0].items())[1][0] ## Esto proporciona un '1'
+print(list(tree[10].items())[0][0]) ## Esto proporciona un '0'
+print(list(tree[10].items())[1][0]) ## Esto proporciona un '1'
 
