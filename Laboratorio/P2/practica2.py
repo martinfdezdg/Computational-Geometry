@@ -110,6 +110,9 @@ def decodifica(binario, d):
             codigo = ''
     return palabra
 
+def codifica_usual(distr):
+    count = math.log(distr.size,2)
+    return math.trunc(count)
 
 
 # FORMATO
@@ -189,12 +192,11 @@ print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 palabra = 'medieval'
 codifica_huffman_en = codifica(palabra, d_en)
 codifica_huffman_es = codifica(palabra, d_es)
-codifica_usual = ''.join(format(c, 'b') for c in bytearray(palabra, "utf-8"))
 
 print("Codificacion de \"" + palabra + "\" en inglés: " + codifica_huffman_en)
-print("   Eficiencia del " + str(len(codifica_usual)/len(codifica_huffman_en)*100) + "%")
+print("   Eficiencia del " + str(codifica_usual(distr_en)*len(palabra)/len(codifica_huffman_en)*100) + "%")
 print("Codificacion de \"" + palabra + "\" en español: " + codifica_huffman_es)
-print("   Eficiencia del " + str(len(codifica_usual)/len(codifica_huffman_es)*100) + "%")
+print("   Eficiencia del " + str(codifica_usual(distr_es)*len(palabra)/len(codifica_huffman_es)*100) + "%")
 
 # APARTADO iii)
 print("\n" + Formato.BOLD + "Apartado iii)" + Formato.RESET)
