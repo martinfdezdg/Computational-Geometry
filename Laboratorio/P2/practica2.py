@@ -117,15 +117,15 @@ class Formato:
     BOLD = "\033[1m"
     RESET = "\033[0m"
 
-#### Vamos al directorio de trabajo####
+#### Vamos al directorio de trabajo ####
 os.getcwd()
 #os.chdir(ubica)
 #files = os.listdir(ruta)
 
-with open('GCOM2022_pract2_auxiliar_eng.txt', 'r',encoding="utf8") as file:
+with open('/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/GCom/Laboratorio/P2/GCOM2022_pract2_auxiliar_eng.txt', 'r',encoding="utf8") as file:
       en = file.read()
      
-with open('GCOM2022_pract2_auxiliar_esp.txt', 'r',encoding="utf8") as file:
+with open('/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/GCom/Laboratorio/P2/GCOM2022_pract2_auxiliar_esp.txt', 'r',encoding="utf8") as file:
       es = file.read()
     
 # APARTADO i)
