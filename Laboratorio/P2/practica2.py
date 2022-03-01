@@ -6,8 +6,8 @@ Martín Fernández de Diego
 
 import os
 import numpy as np
-import pandas as pd
 import math
+import pandas as pd
 from collections import Counter
 
 """
@@ -30,7 +30,7 @@ def huffman_branch(distr):
 
 """
 Dado un dataframe
-devuelve un arbol de Huffman
+devuelve el arbol de Huffman
 """
 def huffman_tree(distr):
     tree = np.array([])
@@ -42,8 +42,8 @@ def huffman_tree(distr):
     return(tree)
 
 """
-Dado un arbol
-devuelve un diccionario con el codigo de cada caracter
+Dado un arbol de Huffman
+devuelve un diccionario con el codigo de cada estado
 """
 def extraer_cadena_caracter(tree):
     d = dict() # diccionario {carácter : código}   
@@ -63,7 +63,7 @@ def extraer_cadena_caracter(tree):
     return d
 
 """
-Dado un dataframe y un diccionario
+Dado un dataframe y un diccionario de un código de Huffman
 devuelve la longitud media, es decir, la suma de las longitudes de los elementos por sus probabilidades
 """
 def longitud_media(distr,d):
@@ -83,8 +83,8 @@ def entropia(distr):
     return h
 
 """
-Dada una palabra y un diccionario
-devuelve su codificación en binario en el idioma del diccionario
+Dada una palabra y un diccionario de un código de Huffman
+devuelve su codificación en binario
 """
 def codifica(palabra, d):
     binario = ""
@@ -93,8 +93,8 @@ def codifica(palabra, d):
     return binario
 
 """
-Dada una palabra en binario y un diccionario
-devuelve su decodificación en el idioma del diccionario
+Dada una palabra en binario y un diccionario de un código de Huffman
+devuelve su decodificación 
 """
 def decodifica(binario, d):
     palabra = ""
@@ -110,9 +110,13 @@ def decodifica(binario, d):
             codigo = ''
     return palabra
 
-def codifica_usual(distr):
-    count = math.log(distr.size,2)
-    return math.trunc(count)
+"""
+Dada una palabra y un dataframe con los caracteres disponibles
+devuelve la longitud de la codificacion binaria usual de esa palabra
+"""
+def codifica_usual(palabra, distr):
+    count = math.log(len(distr),2)
+    return len(palabra)*math.ceil(count)
 
 
 # FORMATO
@@ -145,7 +149,7 @@ tab_en_weights = np.array(list(tab_en.values()))
 tab_en_probab = tab_en_weights/float(np.sum(tab_en_weights))
 distr_en = pd.DataFrame({'states': tab_en_states, 'probab': tab_en_probab})
 distr_en = distr_en.sort_values(by='probab', ascending=True)
-distr_en.index=np.arange(0,len(tab_en_states))
+distr_en.index = np.arange(0,len(tab_en_states))
 
 tree_en = huffman_tree(distr_en)
 
@@ -194,9 +198,9 @@ codifica_huffman_en = codifica(palabra, d_en)
 codifica_huffman_es = codifica(palabra, d_es)
 
 print("Codificacion de \"" + palabra + "\" en inglés: " + codifica_huffman_en)
-print("   Eficiencia del " + str(codifica_usual(distr_en)*len(palabra)/len(codifica_huffman_en)*100) + "%")
+print("   Eficiencia del " + str(codifica_usual(palabra,distr_en)/len(codifica_huffman_en)*100) + "%")
 print("Codificacion de \"" + palabra + "\" en español: " + codifica_huffman_es)
-print("   Eficiencia del " + str(codifica_usual(distr_es)*len(palabra)/len(codifica_huffman_es)*100) + "%")
+print("   Eficiencia del " + str(codifica_usual(palabra,distr_es)/len(codifica_huffman_es)*100) + "%")
 
 # APARTADO iii)
 print("\n" + Formato.BOLD + "Apartado iii)" + Formato.RESET)
