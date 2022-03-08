@@ -14,7 +14,7 @@ from sklearn.cluster import KMeans
 from sklearn import metrics
 from sklearn.datasets import make_blobs
 from scipy.spatial import ConvexHull, convex_hull_plot_2d
-#from scipy.spatial import Voronoi, voronoi_plot_2d
+from scipy.spatial import Voronoi, voronoi_plot_2d
 import matplotlib.pyplot as plt
 
 # #############################################################################
@@ -80,5 +80,8 @@ plt.plot(problem[:,0],problem[:,1],'o', markersize=12, markerfacecolor="red")
 
 plt.title('Fixed number of KMeans clusters: %d' % n_clusters)
 plt.show()
+
+vor = Voronoi(problem)
+voronoi_plot_2d(vor)
 
 
