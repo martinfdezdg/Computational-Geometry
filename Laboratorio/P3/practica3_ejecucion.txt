@@ -1,0 +1,16 @@
+Apartado i)
+Número óptimo de vecindades:  3
+
+Apartado ii)
+Umbral de distancia euclidiana óptimo:  0.2799999999999999
+Número óptimo de vecindades:  2
+Umbral de distancia manhattan óptimo:  0.3599999999999999
+Número óptimo de vecindades:  2
+
+Apartado iii)
+El punto  [0, 0] se encuentra en el cluster  1 según la distancia euclídea
+El punto  [0, 0] se encuentra en el cluster  1 según la distancia manhattan
+Comprobación:  1
+El punto  [0, -1] se encuentra en el cluster  2 según la distancia euclídea
+El punto  [0, -1] se encuentra en el cluster  2 según la distancia manhattan
+Comprobación:  2
