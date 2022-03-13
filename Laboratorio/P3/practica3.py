@@ -206,6 +206,6 @@ cluster2 = distancias_euclideas.index(min(distancias_euclideas))
 print("El punto ",punto2,"se encuentra en el cluster ",cluster2,"según la distancia euclídea")
 distancias_manhattan = [distancia_manhattan(punto2,centers[i]) for i in range(len(centers))]
 cluster2 = distancias_manhattan.index(min(distancias_manhattan))
-print("El punto ",punto1,"se encuentra en el cluster ",cluster2,"según la distancia manhattan")
+print("El punto ",punto2,"se encuentra en el cluster ",cluster2,"según la distancia manhattan")
 print("Comprobación: ",kmeans.predict([punto2])[0])
 
