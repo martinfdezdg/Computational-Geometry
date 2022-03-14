@@ -23,7 +23,7 @@ from netCDF4 import Dataset
 #from scipy.io import netcdf as nc
 from sklearn.decomposition import PCA
 
-workpath = ""
+workpath = "/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/Computational-Geometry/Laboratorio/P4"
 
 #import os
 #workpath = "C:/NCEP"
