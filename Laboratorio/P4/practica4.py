@@ -46,6 +46,8 @@ def lons_normal_ref(matrix):
     rows, _ = matrix.shape
     return [np.concatenate([matrix[i][72:], matrix[i][0:72]]) for i in range(rows)]
 
+
+
 # APARTADO i)
 
 f = Dataset("hgt.2021.nc", "r", format="NETCDF4")
