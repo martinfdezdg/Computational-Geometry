@@ -130,64 +130,36 @@ plt.show()
 
 # APARTADO ii)
 
-"""
-Distribución espacial de la temperatura en el nivel de 500hPa, para el primer día
-"""
-plt.contour(lons, lats, lons_normal_ref(hgt21[0, level==500., :, :].reshape(len(lats), len(lons))))
-plt.show()
+# Restringimos el espacio de búsqueda a las longitudes (-20,20) y latitudes (30,50).
+hgt21c = hgt21[:, :, :, np.logical_or(340 < lons, lons < 20)]
+hgt21c = hgt21c[:, :, np.logical_and(30 < lats, lats < 50),:]
 
-"""
-hgt21b = hgt21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
-air21b = air21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
+hgt22c = hgt22[:, :, :, np.logical_or(340 < lons, lons < 20)]
+hgt22c = hgt22c[:, :, np.logical_and(30 < lats, lats < 50),:]
 
-#air3 = air2.reshape(len(time),len(lats),len(lons))
+# Tomamos el índice correspondiente al día 11 de enero de 2022.
+dt_time22 = [dt.date(1800, 1, 1) + dt.timedelta(hours=t) for t in time22]
+np.min(dt_time22)
+np.max(dt_time22)
+dia0 = dt.date(2022, 1, 11)
+idx0 = dt_time22.index(dia0)
 
-n_components=4
+# Obtenemos los datos del día 11 de enero de 2022.
+a0 = hgt22c[idx0, :, :, :]
 
-X = hgt21b
-Y = hgt21b.transpose()
-pca = PCA(n_components=n_components)
-Element_pca0 = pca.fit_transform(Y)
-Element_pca0 = Element_pca0.transpose(1,0).reshape(n_components,len(lats),len(lons))
+# Calculamos la distancia euclidia entre el día 11 de enero de 2022 y los días de 2021.
+distance = []
 
-#Interpretar el siguiente resultado
-pca.fit(Y)
-print(pca.explained_variance_ratio_)
-out = pca.singular_values_
 
-#Interpretar el siguiente resultado
-pca.fit(X)
-print(pca.explained_variance_ratio_)
-out = pca.singular_values_
 
-#X = air21b
-X = hgt21b
-State_pca = pca.fit_transform(X)
-Element_pca1 = pca.fit(X).components_
-Element_pca1 = Element_pca1.reshape(n_components,len(lats),len(lons))
-print(pca.explained_variance_ratio_)
 
-#Ejercicio de la práctica - Opción 1
-fig = plt.figure()
-fig.subplots_adjust(hspace=0.4, wspace=0.4)
-for i in range(1, 5):
-    ax = fig.add_subplot(2, 2, i)
-    ax.text(0.5, 90, 'PCA-'+str(i),
-           fontsize=18, ha='center')
-    plt.contour(lons, lats, Element_pca0[i-1,:,:])
-plt.show()
 
-#Ejercicio de la práctica - Opción 2
-fig = plt.figure()
-fig.subplots_adjust(hspace=0.4, wspace=0.4)
-for i in range(1, 5):
-    ax = fig.add_subplot(2, 2, i)
-    ax.text(0.5, 90, 'PCA-'+str(i),
-           fontsize=18, ha='center')
-    plt.contour(lons, lats, Element_pca1[i-1,:,:])
-plt.show()
 
-#time_idx = 237
+
+
+
+
+# time_idx = 237
 # Python and the reanalaysis are slightly off in time so this fixes that problem
 # offset = dt.timedelta(hours=0)
 # List of all times in the file as datetime objects
@@ -195,8 +167,28 @@ dt_time21 = [dt.date(1800, 1, 1) + dt.timedelta(hours=t) for t in time21]
 np.min(dt_time21)
 np.max(dt_time21)
 
-dt_time22 = [dt.date(1800, 1, 1) + dt.timedelta(hours=t) for t in time22]
-np.min(dt_time22)
-np.max(dt_time22)
-dia0 = dt.date(2022, 1, 11)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 """
+Distribución espacial de la temperatura en el nivel de 500hPa, para el primer día
+"""
+plt.contour(lons, lats, lons_normal_ref(hgt21[0, level==500., :, :].reshape(len(lats), len(lons))))
+plt.show()
