@@ -48,7 +48,7 @@ def lons_normal_ref(matrix):
 
 # APARTADO i)
 
-f = Dataset("/hgt.2021.nc", "r", format="NETCDF4")
+f = Dataset("hgt.2021.nc", "r", format="NETCDF4")
 time = f.variables['time'][:].copy()
 lons = lon_normal_ref(f.variables['lon'][:].copy())
 lats = f.variables['lat'][:].copy()
