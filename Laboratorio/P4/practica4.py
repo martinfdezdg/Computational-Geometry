@@ -28,7 +28,7 @@ from netCDF4 import Dataset
 #from scipy.io import netcdf as nc
 from sklearn.decomposition import PCA
 
-workpath = "/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/Computational-Geometry/Laboratorio/P4"
+#workpath = "/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/Computational-Geometry/Laboratorio/P4"
 
 """
 Dada una lista con longitudes [0,2pi]
@@ -48,7 +48,7 @@ def lons_normal_ref(matrix):
 
 # APARTADO i)
 
-f = Dataset(workpath + "/hgt.2021.nc", "r", format="NETCDF4")
+f = Dataset("/hgt.2021.nc", "r", format="NETCDF4")
 time = f.variables['time'][:].copy()
 lons = lon_normal_ref(f.variables['lon'][:].copy())
 lats = f.variables['lat'][:].copy()
@@ -64,6 +64,8 @@ Distribución espacial de la temperatura en el nivel de 500hPa, para el primer d
 plt.contour(lons, lats, lons_normal_ref(hgt[0, level==500., :, :].reshape(len(lats),len(lons))))
 plt.show()
 
+
+"""
 hgt21b = hgt21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
 air21b = air21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
 
@@ -126,3 +128,4 @@ dt_time22 = [dt.date(1800, 1, 1) + dt.timedelta(hours=t) for t in time22]
 np.min(dt_time22)
 np.max(dt_time22)
 dia0 = dt.date(2022, 1, 11)
+"""
