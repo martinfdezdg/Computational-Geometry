@@ -28,18 +28,6 @@ from netCDF4 import Dataset
 from sklearn.decomposition import PCA
 
 #workpath = "/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/Computational-Geometry/Laboratorio/P4"
-   
-"""
-Dada una matriz (latitud,longitud) con valores en el dominio de longitud [0,2pi]
-devuelve la lista con valores en el dominio de longitud [-pi,pi]
-"""
-def lons_normal_ref(matrix):
-    rows, _ = matrix.shape
-    return [np.concatenate([matrix[i][72:], matrix[i][0:72]]) for i in range(rows)]
-
-
-
-# APARTADO i)
 
 f = Dataset("air.2021.nc", "r", format="NETCDF4")
 time = f.variables['time'][:].copy()
@@ -81,13 +69,72 @@ time_units = f.variables['time'].units
 hgt22 = f.variables['hgt'][:].copy()
 f.close()
 
+
+
+# APARTADO i)
+
+"""
+Dada una matriz (latitud,longitud) con valores en el dominio de longitud [0,2pi]
+devuelve la lista con valores en el dominio de longitud [-pi,pi]
+"""
+def lons_normal_ref(matrix):
+    rows, _ = matrix.shape
+    return [np.concatenate([matrix[i][72:], matrix[i][0:72]]) for i in range(rows)]
+
+hgt21b = hgt21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
+
+n_components = 4
+
+X = hgt21b
+Y = hgt21b.transpose()
+pca = PCA(n_components=n_components)
+
+# Interpretar el siguiente resultado
+pca.fit(X)
+print(pca.explained_variance_ratio_)
+out = pca.singular_values_
+"""
+Salida: [0.4724878  0.06072688 0.03592642 0.02815213]
+La primera componente principal explica el 47% de la varianza del dataset.
+En total, las cuatro primeras componentes principales explican entorno al 60% del dataset al entrenar X.
+"""
+
+# Interpretar el siguiente resultado
+pca.fit(Y)
+print(pca.explained_variance_ratio_)
+out = pca.singular_values_
+"""
+Salida: [0.8877314  0.05177603 0.00543984 0.00357636]
+La primera componente principal explica más del 88% de la varianza del dataset.
+En total, las cuatro primeras componentes principales explican más del 94% del dataset al entrenar Y = tr(X).
+"""
+
+"""
+Dado que es capaz de explicar más varianza con menos componentes,
+se entrena el análisis de componentes principales —PCA— con Y = tr(X)
+"""
+Element_pca0 = pca.fit_transform(Y)
+Element_pca0 = Element_pca0.transpose(1,0).reshape(n_components,len(lats),len(lons))
+
+# Ejercicio de la práctica - Opción 1
+fig = plt.figure()
+fig.subplots_adjust(hspace=0.4, wspace=0.4)
+for i in range(1, 5):
+    ax = fig.add_subplot(2, 2, i)
+    ax.text(0.5, 90, 'PCA-'+str(i),
+           fontsize=18, ha='center')
+    plt.contour(lons, lats, lons_normal_ref(Element_pca0[i-1,:,:])) # Movemos España al medio
+plt.show()
+
+
+
+# APARTADO ii)
+
 """
 Distribución espacial de la temperatura en el nivel de 500hPa, para el primer día
 """
 plt.contour(lons, lats, lons_normal_ref(hgt21[0, level==500., :, :].reshape(len(lats), len(lons))))
 plt.show()
-
-
 
 """
 hgt21b = hgt21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
