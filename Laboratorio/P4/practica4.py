@@ -18,7 +18,6 @@ Referencias:
 
     Temperatura en niveles de superficie:
     https://psl.noaa.gov/cgi-bin/db_search/DBListFiles.pl?did=59&tid=97457&vid=1497
-    
 """
 
 import datetime as dt  # Python standard library datetime  module
@@ -29,15 +28,7 @@ from netCDF4 import Dataset
 from sklearn.decomposition import PCA
 
 #workpath = "/Users/martin/Documents/Estudios/Matemáticas e Ingeniería Informática/2021-2022/GCom/Git/Computational-Geometry/Laboratorio/P4"
-
-"""
-Dada una lista con longitudes [0,2pi]
-devuelve la lista con longitud [-pi,pi]
-"""
-def lon_normal_ref(list):
-    # La lista debe ser monótona
-    return np.concatenate([list[72:]-360, list[0:72]])
-    
+   
 """
 Dada una matriz (latitud,longitud) con valores en el dominio de longitud [0,2pi]
 devuelve la lista con valores en el dominio de longitud [-pi,pi]
@@ -50,21 +41,52 @@ def lons_normal_ref(matrix):
 
 # APARTADO i)
 
-f = Dataset("hgt.2021.nc", "r", format="NETCDF4")
+f = Dataset("air.2021.nc", "r", format="NETCDF4")
 time = f.variables['time'][:].copy()
-lons = lon_normal_ref(f.variables['lon'][:].copy())
-lats = f.variables['lat'][:].copy()
+time_bnds = f.variables['time_bnds'][:].copy()
+time_units = f.variables['time'].units
 level = f.variables['level'][:].copy()
-hgt = f.variables['hgt'][:].copy()
-#scale = f.variables['hgt'].scale_factor
-#offset = f.variables['hgt'].add_offset
+lats = f.variables['lat'][:].copy()
+lons = f.variables['lon'][:].copy()
+air21 = f.variables['air'][:].copy()
+air_units = f.variables['air'].units
+#air_scale = f.variables['air'].scale_factor
+#air_offset = f.variables['air'].add_offset
+f.close()
+
+f = Dataset("air.2022.nc", "r", format="NETCDF4")
+time = f.variables['time'][:].copy()
+time_bnds = f.variables['time_bnds'][:].copy()
+time_units = f.variables['time'].units
+air22 = f.variables['air'][:].copy()
+f.close()
+
+
+f = Dataset("hgt.2021.nc", "r", format="NETCDF4")
+time21 = f.variables['time'][:].copy()
+time_bnds = f.variables['time_bnds'][:].copy()
+time_units = f.variables['time'].units
+hgt21 = f.variables['hgt'][:].copy()
+hgt_units = f.variables['hgt'].units
+#hgt_scale = f.variables['hgt'].scale_factor
+#hgt_offset = f.variables['hgt'].add_offset
+f.close()
+
+
+#f = nc.netcdf_file(workpath + "/" + files[0], 'r')
+f = Dataset("hgt.2022.nc", "r", format="NETCDF4")
+time22 = f.variables['time'][:].copy()
+time_bnds = f.variables['time_bnds'][:].copy()
+time_units = f.variables['time'].units
+hgt22 = f.variables['hgt'][:].copy()
 f.close()
 
 """
 Distribución espacial de la temperatura en el nivel de 500hPa, para el primer día
 """
-plt.contour(lons, lats, lons_normal_ref(hgt[0, level==500., :, :].reshape(len(lats),len(lons))))
+plt.contour(lons, lats, lons_normal_ref(hgt21[0, level==500., :, :].reshape(len(lats), len(lons))))
 plt.show()
+
 
 
 """
