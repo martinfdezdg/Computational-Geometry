@@ -22,6 +22,7 @@ Referencias:
 
 import datetime as dt  # Python standard library datetime  module
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 from netCDF4 import Dataset
 #from scipy.io import netcdf as nc
@@ -181,6 +182,28 @@ np.max(dt_time21)
 
 
 
+
+
+
+
+
+
+
+# APARTADO ii)
+
+# subsistema
+
+def dist_euclidea(dia0, dia):
+    dist = 0
+    for lat in range(len(dia0[0])):
+        for lon in range(len(dia0[0][0])):
+            dia0_500 = 0.5*dia0[level==500.][0][lat][lon]
+            dia0_1000 = 0.5*dia0[level==1000.][0][lat][lon]
+            dia_500 = 0.5*dia[level==500.][0][lat][lon]         
+            dia_1000 = 0.5*dia[level==1000.][0][lat][lon]
+            dist += (dia0_500 - dia_500)**2 + (dia0_1000 - dia_1000)**2
+    dist = math.sqrt(dist)
+    return dist
 
 
 
