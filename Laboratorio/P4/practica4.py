@@ -79,7 +79,7 @@ Dada una matriz (latitud,longitud) con valores en el dominio de longitud [0,2pi]
 devuelve la lista con valores en el dominio de longitud [-pi,pi]
 """
 def lons_normal_ref(matrix):
-    rows, _ = matrix.shape
+    rows = matrix.shape[0]
     return [np.concatenate([matrix[i][72:], matrix[i][0:72]]) for i in range(rows)]
 
 hgt21b = hgt21[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
@@ -143,42 +143,34 @@ def dist_euclidea(dia0, dia):
     dist = math.sqrt(dist)
     return dist
 
-# Restringimos el espacio de búsqueda a las longitudes (-20,20) y latitudes (30,50).
+# Restringimos el espacio de búsqueda a las longitudes (-20,20) y latitudes (30,50)
 hgt21c = hgt21[:, :, :, np.logical_or(340 < lons, lons < 20)]
 hgt21c = hgt21c[:, :, np.logical_and(30 < lats, lats < 50),:]
 
 hgt22c = hgt22[:, :, :, np.logical_or(340 < lons, lons < 20)]
 hgt22c = hgt22c[:, :, np.logical_and(30 < lats, lats < 50),:]
 
-# Tomamos el índice correspondiente al día 11 de enero de 2022.
+# Tomamos el índice correspondiente al día 11 de enero de 2022
 dt_time22 = [dt.date(1800, 1, 1) + dt.timedelta(hours=t) for t in time22]
-np.min(dt_time22)
-np.max(dt_time22)
 dia0 = dt.date(2022, 1, 11)
 idx0 = dt_time22.index(dia0)
 
-# Obtenemos los datos del día 11 de enero de 2022.
+# Obtenemos los datos del día 11 de enero de 2022
 a0 = hgt22c[idx0, :, :, :]
 
-# Calculamos la distancia euclidia entre el día 11 de enero de 2022 y los días de 2021.
-distance = []
+# Calculamos la distancia euclidia entre el día 11 de enero de 2022 y los días de 2021
+distancia_idx = [[dist_euclidea(a0,hgt21c[i, :, :, :]), i] for i in range(hgt21.shape[0])]
 
+# Mostramos los 4 días más análogos considerando solo Z
+num_dias = 4
+distancia_idx.sort()
+idx_analogos = [idx for _, idx in distancia_idx[0:num_dias]]
 
-
-
-
-
-
-
-
-
-# time_idx = 237
-# Python and the reanalaysis are slightly off in time so this fixes that problem
-# offset = dt.timedelta(hours=0)
-# List of all times in the file as datetime objects
+# Buscamos el día correspondiente al índice almacenados en el vector de pares distancia-índice
 dt_time21 = [dt.date(1800, 1, 1) + dt.timedelta(hours=t) for t in time21]
-np.min(dt_time21)
-np.max(dt_time21)
+
+print("Los", num_dias, "de 2021 más análogos al 11 de enero de 2022 son")
+print([dt_time21[idx_analogos[i]] for i in range(num_dias)])
 
 
 
