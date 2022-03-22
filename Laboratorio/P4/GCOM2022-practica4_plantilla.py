@@ -52,7 +52,7 @@ air_units = f.variables['air'].units
 print(air21.shape)
 f.close()
 
-f = Dataset(workpath + "/air.2022.nc", "r", format="NETCDF4")
+f = Dataset("air.2022.nc", "r", format="NETCDF4")
 time = f.variables['time'][:].copy()
 time_bnds = f.variables['time_bnds'][:].copy()
 time_units = f.variables['time'].units
@@ -60,7 +60,7 @@ air22 = f.variables['air'][:].copy()
 f.close()
 
 
-f = Dataset(workpath + "/hgt.2021.nc", "r", format="NETCDF4")
+f = Dataset("hgt.2021.nc", "r", format="NETCDF4")
 time21 = f.variables['time'][:].copy()
 time_bnds = f.variables['time_bnds'][:].copy()
 time_units = f.variables['time'].units
@@ -73,7 +73,7 @@ f.close()
 
 
 #f = nc.netcdf_file(workpath + "/" + files[0], 'r')
-f = Dataset(workpath + "/hgt.2022.nc", "r", format="NETCDF4")
+f = Dataset("hgt.2022.nc", "r", format="NETCDF4")
 time22 = f.variables['time'][:].copy()
 time_bnds = f.variables['time_bnds'][:].copy()
 time_units = f.variables['time'].units
