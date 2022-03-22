@@ -131,6 +131,18 @@ plt.show()
 
 # APARTADO ii)
 
+def dist_euclidea(dia0, dia):
+    dist = 0
+    for lat in range(len(dia0[0])):
+        for lon in range(len(dia0[0][0])):
+            dia0_500 = 0.5*dia0[level==500.][0][lat][lon]
+            dia0_1000 = 0.5*dia0[level==1000.][0][lat][lon]
+            dia_500 = 0.5*dia[level==500.][0][lat][lon]
+            dia_1000 = 0.5*dia[level==1000.][0][lat][lon]
+            dist += (dia0_500 - dia_500)**2 + (dia0_1000 - dia_1000)**2
+    dist = math.sqrt(dist)
+    return dist
+
 # Restringimos el espacio de búsqueda a las longitudes (-20,20) y latitudes (30,50).
 hgt21c = hgt21[:, :, :, np.logical_or(340 < lons, lons < 20)]
 hgt21c = hgt21c[:, :, np.logical_and(30 < lats, lats < 50),:]
@@ -189,21 +201,21 @@ np.max(dt_time21)
 
 
 
-# APARTADO ii)
 
-# subsistema
 
-def dist_euclidea(dia0, dia):
-    dist = 0
-    for lat in range(len(dia0[0])):
-        for lon in range(len(dia0[0][0])):
-            dia0_500 = 0.5*dia0[level==500.][0][lat][lon]
-            dia0_1000 = 0.5*dia0[level==1000.][0][lat][lon]
-            dia_500 = 0.5*dia[level==500.][0][lat][lon]         
-            dia_1000 = 0.5*dia[level==1000.][0][lat][lon]
-            dist += (dia0_500 - dia_500)**2 + (dia0_1000 - dia_1000)**2
-    dist = math.sqrt(dist)
-    return dist
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
