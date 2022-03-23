@@ -121,6 +121,7 @@ def apartado2():
     for i in range(n_dias):
         media = np.add(media, air21[dist_analogos[i][0]][level == 1000])
     media = media*(1/n_dias)
+    print(media)
     
     #Hallamos el error absoluto medio de esta variable
     a0 = (air22[index_a0][level == 1000])*(-1) #variable T para dia a0
