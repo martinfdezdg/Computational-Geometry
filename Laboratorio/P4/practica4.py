@@ -56,7 +56,6 @@ time_units = f.variables['time'].units
 air22 = f.variables['air'][:].copy()
 f.close()
 
-
 f = Dataset("hgt.2021.nc", "r", format="NETCDF4")
 time21 = f.variables['time'][:].copy()
 time_bnds = f.variables['time_bnds'][:].copy()
@@ -66,7 +65,6 @@ hgt_units = f.variables['hgt'].units
 #hgt_scale = f.variables['hgt'].scale_factor
 #hgt_offset = f.variables['hgt'].add_offset
 f.close()
-
 
 #f = nc.netcdf_file(workpath + "/" + files[0], 'r')
 f = Dataset("hgt.2022.nc", "r", format="NETCDF4")
@@ -78,15 +76,12 @@ f.close()
 
 
 
-# APARTADO i)
-print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
-
 """
 Dada una matriz (latitud,longitud) con valores en el dominio de longitud [0,2pi]
 devuelve la lista con valores en el dominio de longitud [-pi,pi]
 """
 def lons_normal_ref(dataset):
-    return_dataset = copy(dataset)
+    return_dataset = copy(dataset) # Necesario para que no copie por referencia
     for i in range(72):
         return_dataset[:,:,:,i] = dataset[:,:,:,i+72]
     for i in range(72):
@@ -98,6 +93,11 @@ hgt21a = lons_normal_ref(hgt21)
 hgt22a = lons_normal_ref(hgt22)
 air21a = lons_normal_ref(air21)
 air22a = lons_normal_ref(air22)
+
+
+
+# APARTADO i)
+print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 
 hgt21b = hgt21a[:,level==500.,:,:].reshape(len(time21),len(lats)*len(lons))
 
@@ -148,17 +148,7 @@ plt.show()
 # APARTADO ii)
 print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 
-def dist_euclidea(a0, dia_aux):
-    d = 0
-    for i in range(len(a0[0])): #latitud
-        for j in range(len(a0[0][0])): #longitud
-            #Para cada elemento aplico su peso w_k segun su p_k
-            #Al hacer a0[level == 500.] me quedo con la fila de level = 500, pero sigo teniendo matriz de dim 3 aunque en la dim 1 solo tengo una "fila"
-            d += 0.5*((a0[level == 500.][0][i][j] - dia_aux[level == 500.][0][i][j])**2)
-            d += 0.5*((a0[level == 1000.][0][i][j] - dia_aux[level == 1000.][0][i][j])**2)
-    return math.sqrt(d)
-
-def dist_euclidea_(dia0, dia):
+def dist_euclidea(dia0, dia):
     dist = 0
     for lat in range(len(dia0[0])):
         for lon in range(len(dia0[0][0])):
@@ -238,7 +228,7 @@ fig.colorbar(p)
 
 ax = fig.add_subplot(2, 2, 2)
 ax.set_title('Selección HGT-media (dist. Euclídea)')
-p = plt.contourf(lons, lats, np.mean(hgt22c[:,5,:,:],axis=0), 200, cmap='jet')
+p = plt.contourf(lons, lats, np.mean(hgt21c[idx_analogos,5,:,:],axis=0), 200, cmap='jet')
 fig.colorbar(p)
 
 ax = fig.add_subplot(2, 2, 3)
