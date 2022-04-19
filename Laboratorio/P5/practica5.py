@@ -84,9 +84,7 @@ x2 = abs(t2) * np.sin(40 * t2/2)**2
 y2 = abs(t2) * -np.cos(40 * t2/2)**2
 z2 = np.sqrt(1-x2**2-y2**2)
 
-"""
-2-esfera + 2-esfera proyectada
-"""
+# Representación: 2-esfera + 2-esfera proyectada
 z0 = 1
 
 fig = plt.figure(figsize=(12,12))
@@ -128,13 +126,23 @@ print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 t = 0.1
 eps = 1e-16
 
+"""
+2-esfera
+definición en paramétricas
+"""
 xt = 2/(2*(1-t) + (1-z)*t + eps)*x
 yt = 2/(2*(1-t) + (1-z)*t + eps)*y
 zt = (-1)*t + z*(1-t)
+
+"""
+gamma-curva
+definición en paramétricas
+"""
 x2t = 2/(2*(1-t) + (1-z2)*t + eps)*x2
 y2t = 2/(2*(1-t) + (1-z2)*t + eps)*y2
 z2t = (-1)*t + z2*(1-t)
 
+# Representación: 2-esfera + 2-esfera proyectada
 fig = plt.figure(figsize=(6, 6))
 ax = plt.axes(projection='3d')
 
@@ -144,14 +152,12 @@ ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('z')
 ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, cmap='viridis', alpha=0.5, edgecolor='none')
-ax.plot(x2t,y2t, z2t, '-b', c="white", zorder=3)
+ax.plot(x2t, y2t, z2t, '-b', c="white", zorder=3)
 
 plt.show()
 plt.close(fig)
 
-animate(np.arange(0, 1, 0.1)[1])
-plt.show()
-
+# Representación: animación
 fig = plt.figure(figsize=(6, 6))
-ani = animation.FuncAnimation(fig, animate, np.arange(0,1, 0.05), init_func=init, interval=20)
+ani = animation.FuncAnimation(fig, animate, np.arange(0, 1, 0.05), init_func=init, interval=20)
 ani.save("ejemplo.gif", fps = 5)
