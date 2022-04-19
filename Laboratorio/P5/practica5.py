@@ -143,7 +143,7 @@ ax.set_ylim3d(-8, 8)
 ax.set_xlabel('x')
 ax.set_ylabel('y')
 ax.set_zlabel('z')
-ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, cmap='viridis', alpha=0.5, edgecolor='none')
 ax.plot(x2t,y2t, z2t, '-b', c="white", zorder=3)
 
 plt.show()
