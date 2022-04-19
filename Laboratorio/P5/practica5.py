@@ -12,30 +12,17 @@ import matplotlib.pyplot as plt
 from matplotlib import animation
 #from mpl_toolkits.mplot3d.axes3d import Axes3D
 
-
-
 """
-2-sphere
+Dadas las coordenadas de x y z
+devuelve la proyección de x sobre el eje z
+z0 = 1 porque el polo extraído es el (0,0,1)
 """
-u = np.linspace(0, np.pi, 30)
-v = np.linspace(0, 2 * np.pi, 60)
-
-x = np.outer(np.sin(u), np.sin(v))
-y = np.outer(np.sin(u), np.cos(v))
-z = np.outer(np.cos(u), np.ones_like(v))
-
-t2 = np.linspace(0.001, 1, 200)
-x2 = abs(t2) * np.sin(40 * t2/2)**2
-y2 = abs(t2) * np.cos(40 * t2/2)**2
-z2 = np.sqrt(1-x2**2-y2**2)
-
-fig = plt.figure()
-ax = plt.axes(projection='3d')
-ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
-ax.plot(x2, y2, z2, '-b', c="white", zorder=3)
-ax.set_xlabel('x')
-ax.set_ylabel('y')
-ax.set_zlabel('z')
+def proj(x,z,z0=1,alpha=1/2):
+    z0 = z*0+z0
+    eps = 1e-16
+    x_trans = x/(abs(z0-z)**alpha+eps)
+    return(x_trans)
+    # Nótese que añadimos un épsilon para evitar dividir entre 0
 
 
 
@@ -44,20 +31,48 @@ class Formato:
     BOLD = "\033[1m"
     RESET = "\033[0m"
 
+
+
 # APARTADO i)
 print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 
 """
+2-esfera
+definición en polares
+"""
+u = np.linspace(0, np.pi, 30)
+v = np.linspace(0, 2 * np.pi, 60)
+
+"""
+2-esfera
+transformación en paramétricas
+"""
+x = np.outer(np.sin(u), np.sin(v))
+y = np.outer(np.sin(u), np.cos(v))
+z = np.outer(np.cos(u), np.ones_like(v))
+
+"""
+gamma-curva
+definición en paramétricas
+"""
+t2 = np.linspace(0.001, 1, 200)
+
+x2 = abs(t2) * np.sin(40 * t2/2)**2
+y2 = abs(t2) * np.cos(40 * t2/2)**2
+z2 = np.sqrt(1-x2**2-y2**2)
+
+# Representación
+fig = plt.figure()
+ax = plt.axes(projection='3d')
+ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+ax.plot(x2, y2, z2, '-b', c="white", zorder=3)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
+
+"""
 2-esfera proyectada
 """
-
-def proj(x,z,z0=1,alpha=1/2):
-    z0 = z*0+z0
-    eps = 1e-16
-    x_trans = x/(abs(z0-z)**alpha+eps)
-    return(x_trans)
-    #Nótese que añadimos un épsilon para evitar dividi entre 0!!
-
 fig = plt.figure(figsize=(12,12))
 fig.subplots_adjust(hspace=0.4, wspace=0.2)
 
@@ -118,7 +133,6 @@ fig = plt.figure(figsize=(6, 6))
 #fig.subplots_adjust(hspace=0.4, wspace=0.2)
 ax = plt.axes(projection='3d')
 
-
 ax.set_xlim3d(-8, 8)
 ax.set_ylim3d(-8, 8)
 ax.set_xlabel('x')
@@ -134,7 +148,6 @@ plt.close(fig)
 """
 HACEMOS LA ANIMACIÓN
 """
-
 def animate(t):
     xt = 2/(2*(1-t) + (1-z)*t + eps)*x
     yt = 2/(2*(1-t) + (1-z)*t + eps)*y
