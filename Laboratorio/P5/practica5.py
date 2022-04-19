@@ -17,12 +17,35 @@ Dadas las coordenadas de x y z
 devuelve la proyección de x sobre el eje z
 z0 = 1 porque el polo extraído es el (0,0,1)
 """
-def proj(x,z,z0=1,alpha=1):
+def proj(x,z,z0=-1,alpha=1):
     z0 = z*0+z0
     eps = 1e-16
     x_trans = x/(abs(z0-z)**alpha+eps)
     return(x_trans)
     # Nótese que añadimos un épsilon para evitar dividir entre 0
+    
+"""
+Animación del APARTADO ii)
+"""
+def animate(t):
+    xt = 2/(2*(1-t) + (1-z)*t + eps)*x
+    yt = 2/(2*(1-t) + (1-z)*t + eps)*y
+    zt = (-1)*t + z*(1-t)
+    x2t = 2/(2*(1-t) + (1-z2)*t + eps)*x2
+    y2t = 2/(2*(1-t) + (1-z2)*t + eps)*y2
+    z2t = (-1)*t + z2*(1-t)
+    
+    ax = plt.axes(projection='3d')
+    ax.set_zlim3d(-1,1)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
+    ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, alpha=0.5, cmap='viridis', edgecolor='none')
+    ax.plot(x2t, y2t, z2t, '-b', c="white", zorder=3)
+    return ax
+
+def init():
+    return animate(0)
 
 
 
@@ -85,7 +108,6 @@ ax.set_ylim3d(-8,8)
 ax.plot_surface(proj(x, z, z0), proj(y, z, z0), z*0+z0, rstride=1, cstride=1, cmap='viridis', alpha=0.5, edgecolor='purple')
 ax.plot(proj(x2, z2, z0), proj(y2, z2, z0), z0, '-b', c="white", zorder=3)
 
-#ax.scatter(proj(x2,z2,z0=z0), proj(y2,z2,z0=z0), 1, '-b',c=col,zorder= 3,s=0.1)
 ax.set_title('Stereographic projection');
 ax.set_xlabel('x')
 ax.set_ylabel('y')
@@ -103,7 +125,6 @@ print("\n" + Formato.BOLD + "Apartado ii)" + Formato.RESET)
 """
 2-esfera proyectada - familia paramétrica
 """
-
 t = 0.1
 eps = 1e-16
 
@@ -115,7 +136,6 @@ y2t = 2/(2*(1-t) + (1-z2)*t + eps)*y2
 z2t = (-1)*t + z2*(1-t)
 
 fig = plt.figure(figsize=(6, 6))
-#fig.subplots_adjust(hspace=0.4, wspace=0.2)
 ax = plt.axes(projection='3d')
 
 ax.set_xlim3d(-8, 8)
@@ -127,36 +147,11 @@ ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, cmap='viridis', edgecolor='non
 ax.plot(x2t,y2t, z2t, '-b', c="white", zorder=3)
 
 plt.show()
-#fig.savefig('stereo2.png')   # save the figure to file
-plt.close(fig) 
-
-"""
-HACEMOS LA ANIMACIÓN
-"""
-def animate(t):
-    xt = 2/(2*(1-t) + (1-z)*t + eps)*x
-    yt = 2/(2*(1-t) + (1-z)*t + eps)*y
-    zt = (-1)*t + z*(1-t)
-    x2t = 2/(2*(1-t) + (1-z2)*t + eps)*x2
-    y2t = 2/(2*(1-t) + (1-z2)*t + eps)*y2
-    z2t = (-1)*t + z2*(1-t)
-    
-    ax = plt.axes(projection='3d')
-    ax.set_zlim3d(-1,1)
-    ax.set_xlabel('x')
-    ax.set_ylabel('y')
-    ax.set_zlabel('z')
-    ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, alpha=0.5, cmap='viridis', edgecolor='none')
-    ax.plot(x2t,y2t, z2t, '-b', c="white", zorder=3)
-    return ax
-
-def init():
-    return animate(0)
+plt.close(fig)
 
 animate(np.arange(0, 1, 0.1)[1])
 plt.show()
 
 fig = plt.figure(figsize=(6, 6))
 ani = animation.FuncAnimation(fig, animate, np.arange(0,1, 0.05), init_func=init, interval=20)
-#ani.save("ejemplo.htm", fps = 5) 
 ani.save("ejemplo.gif", fps = 5)
