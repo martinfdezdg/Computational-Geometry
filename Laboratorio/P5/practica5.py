@@ -130,3 +130,4 @@ eps = 1e-16
 fig = plt.figure(figsize=(6, 6))
 ani = animation.FuncAnimation(fig, animate, np.arange(0, 1, 0.05), init_func=init, interval=20)
 ani.save("ejemplo.gif", fps = 5)
+plt.close(fig)
