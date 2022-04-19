@@ -1,5 +1,5 @@
 """
-PRÁCTICA 5: PCA Y ANALOGÍA
+PRÁCTICA 5: DEFORMACIÓN DE VARIEDADES DIFERENCIABLES
 Belén Sánchez Centeno
 Martín Fernández de Diego
 """
@@ -25,8 +25,8 @@ y = np.outer(np.sin(u), np.cos(v))
 z = np.outer(np.cos(u), np.ones_like(v))
 
 t2 = np.linspace(0.001, 1, 200)
-x2 = abs(t2) * np.sin(100 * t2/2)
-y2 = abs(t2) * np.cos(100 * t2/2)
+x2 = abs(t2) * np.sin(40 * t2/2)**2
+y2 = abs(t2) * np.cos(40 * t2/2)**2
 z2 = np.sqrt(1-x2**2-y2**2)
 
 fig = plt.figure()
@@ -48,9 +48,6 @@ print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 2-esfera proyectada
 """
 
-"""
-proyección
-"""
 def proj(x,z,z0=1,alpha=1):
     z0 = z*0+z0
     eps = 1e-16
