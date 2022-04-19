@@ -33,6 +33,9 @@ fig = plt.figure()
 ax = plt.axes(projection='3d')
 ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
 ax.plot(x2, y2, z2, '-b', c="white", zorder=3)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
 
 
 
@@ -48,7 +51,7 @@ print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 2-esfera proyectada
 """
 
-def proj(x,z,z0=1,alpha=1):
+def proj(x,z,z0=1,alpha=1/2):
     z0 = z*0+z0
     eps = 1e-16
     x_trans = x/(abs(z0-z)**alpha+eps)
@@ -67,6 +70,9 @@ ax.plot(x2, y2, z2, '-b', c="white", zorder=3)
 
 #ax.scatter(x2, y2, z2, '-b',c=col,zorder= 3,s=0.1)
 ax.set_title('2-sphere');
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
 #ax.text(0.5, 90, 'PCA-'+str(i), fontsize=18, ha='center')
 
 ax = fig.add_subplot(2, 2, 2, projection='3d')
@@ -81,6 +87,9 @@ ax.plot(proj(x2, z2, z0=z0), proj(y2, z2, z0=z0), 1, '-b', c="white", zorder=3)
 
 #ax.scatter(proj(x2,z2,z0=z0), proj(y2,z2,z0=z0), 1, '-b',c=col,zorder= 3,s=0.1)
 ax.set_title('Stereographic projection');
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
 
 plt.show()
 fig.savefig('stereo2.png', dpi=250)   # save the figure to file
@@ -112,6 +121,9 @@ ax = plt.axes(projection='3d')
 
 ax.set_xlim3d(-8, 8)
 ax.set_ylim3d(-8, 8)
+ax.set_xlabel('x')
+ax.set_ylabel('y')
+ax.set_zlabel('z')
 ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
 ax.plot(x2t,y2t, z2t, '-b', c="white", zorder=3)
 
@@ -133,6 +145,9 @@ def animate(t):
     
     ax = plt.axes(projection='3d')
     ax.set_zlim3d(-1,1)
+    ax.set_xlabel('x')
+    ax.set_ylabel('y')
+    ax.set_zlabel('z')
     ax.plot_surface(xt, yt, zt, rstride=1, cstride=1, alpha=0.5, cmap='viridis', edgecolor='none')
     ax.plot(x2t,y2t, z2t, '-b', c="white", zorder=3)
     return ax
