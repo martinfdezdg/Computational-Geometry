@@ -17,7 +17,7 @@ Dadas las coordenadas de x y z
 devuelve la proyección de x sobre el eje z
 z0 = 1 porque el polo extraído es el (0,0,1)
 """
-def proj(x,z,z0=-1,alpha=1):
+def proj(x,z,z0=1,alpha=1):
     z0 = z*0+z0
     eps = 1e-16
     x_trans = x/(abs(z0-z)**alpha+eps)
@@ -55,7 +55,7 @@ z = np.outer(np.cos(u), np.ones_like(v))
 gamma-curva
 definición en paramétricas
 """
-t2 = np.linspace(0.001, 1, 600)
+t2 = np.linspace(0.001, 1, 200)
 
 x2 = abs(t2) * np.sin(40 * t2/2)**2
 y2 = abs(t2) * -np.cos(40 * t2/2)**2
@@ -64,7 +64,7 @@ z2 = np.sqrt(1-x2**2-y2**2)
 """
 2-esfera + 2-esfera proyectada
 """
-z0 = -1
+z0 = 1
 
 fig = plt.figure(figsize=(12,12))
 fig.subplots_adjust(hspace=0.4, wspace=0.2)
