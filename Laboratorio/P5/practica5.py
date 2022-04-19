@@ -17,7 +17,7 @@ Dadas las coordenadas de x y z
 devuelve la proyección de x sobre el eje z
 z0 = 1 porque el polo extraído es el (0,0,1)
 """
-def proj(x,z,z0=1,alpha=1/2):
+def proj(x,z,z0=-1,alpha=1):
     z0 = z*0+z0
     eps = 1e-16
     x_trans = x/(abs(z0-z)**alpha+eps)
@@ -58,7 +58,7 @@ definición en paramétricas
 t2 = np.linspace(0.001, 1, 200)
 
 x2 = abs(t2) * np.sin(40 * t2/2)**2
-y2 = abs(t2) * np.cos(40 * t2/2)**2
+y2 = abs(t2) * -np.cos(40 * t2/2)**2
 z2 = np.sqrt(1-x2**2-y2**2)
 
 # Representación
@@ -80,7 +80,7 @@ fig.subplots_adjust(hspace=0.4, wspace=0.2)
 #col = plt.get_cmap("hot")(c2/np.max(c2))
 
 ax = fig.add_subplot(2, 2, 1, projection='3d')
-ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', edgecolor='none')
+ax.plot_surface(x, y, z, rstride=1, cstride=1, cmap='viridis', alpha=0.5, edgecolor='none')
 ax.plot(x2, y2, z2, '-b', c="white", zorder=3)
 
 #ax.scatter(x2, y2, z2, '-b',c=col,zorder= 3,s=0.1)
@@ -95,9 +95,9 @@ ax.set_xlim3d(-8,8)
 ax.set_ylim3d(-8,8)
 #ax.set_zlim3d(0,1000)
 
-z0 = 1
+z0 = -1
 
-ax.plot_surface(proj(x,z,z0=z0), proj(y,z,z0=z0), z*0+1, rstride=1, cstride=1, cmap='viridis', alpha=0.5, edgecolor='purple')
+ax.plot_surface(proj(x,z), proj(y,z), z*0-1, rstride=1, cstride=1, cmap='viridis', alpha=0.5, edgecolor='purple')
 ax.plot(proj(x2, z2, z0=z0), proj(y2, z2, z0=z0), 1, '-b', c="white", zorder=3)
 
 #ax.scatter(proj(x2,z2,z0=z0), proj(y2,z2,z0=z0), 1, '-b',c=col,zorder= 3,s=0.1)
