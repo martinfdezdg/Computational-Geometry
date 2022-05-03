@@ -64,7 +64,7 @@ print("\n" + Formato.BOLD + "Apartado i)" + Formato.RESET)
 2-esfera
 definición en polares
 """
-u = np.linspace(0, np.pi, 30)
+u = np.linspace(0.05, np.pi, 30)
 v = np.linspace(0, 2 * np.pi, 60)
 
 """
