@@ -28,6 +28,7 @@ def proj(x,z,z0=1,alpha=1):
 Animación del APARTADO ii)
 """
 def animate(t):
+    z0 = -1
     xt = 2/(2*(1-t) + (1-z)*t + eps)*x
     yt = 2/(2*(1-t) + (1-z)*t + eps)*y
     zt = (-1)*t + z*(1-t)
@@ -85,7 +86,7 @@ y2 = abs(t2) * -np.cos(40 * t2/2)**2
 z2 = np.sqrt(1-x2**2-y2**2)
 
 # Representación: 2-esfera + 2-esfera proyectada
-z0 = 1
+z0 = -1
 
 fig = plt.figure(figsize=(12,12))
 fig.subplots_adjust(hspace=0.4, wspace=0.2)
