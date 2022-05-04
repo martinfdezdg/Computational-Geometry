@@ -79,7 +79,7 @@ z = np.outer(np.cos(u), np.ones_like(v))
 gamma-curva
 definición en paramétricas
 """
-t2 = np.linspace(0.001, 1, 200)
+t2 = np.linspace(0.055, 1, 200)
 
 x2 = abs(t2) * np.sin(40 * t2/2)**2
 y2 = abs(t2) * -np.cos(40 * t2/2)**2
